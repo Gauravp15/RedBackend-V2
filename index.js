@@ -18,18 +18,20 @@ const mailer = nodemailer.createTransport({
   },
 })
 app.post("/contact", function (req, res) {
-  // console.log(req.body);
-  const message = {
-    from: req.body.emailaddress,
+  const formData = req.body
+  let mailOptions = {
+    from: `${formData.emailaddress}`,
     to: [contactAddress],
-    subject: "Enquiry Reply frm Redcrackle" || "[No subject]",
-    firstname: req.body.firstname || "[No Firstname]",
-    lastname: req.body.lastname || "[No Lastname]",
-    phonenumber: req.body.phonenumber || "[No Phone Number]",
-    message: req.body.message || "[No message]"
+    subject: "New form Submission frm Redcrackle" || "[No subject]",
+    text: 'Hi, Admin',
+    html: `<b>Firstname: ${formData.firstname}</b><br>
+           <b>Lastname: ${formData.lastname}</b><br>
+           <b>Message: ${formData.message}</b><br>
+            <b>Phone: ${formData.phonenumber}</b><br>
+            <b>Email: ${formData.emailaddress}</b>`
   }
   mailer.sendMail(
-    message,
+    mailOptions,
     function (err, info) {
       if (err) return res.status(500).send(err)
       // res.json({ success: true })

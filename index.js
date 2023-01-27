@@ -8,13 +8,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-const contactAddress = "devendra.mishra26@gmail.com"
+const contactAddress = "shaanjyot13@gmail.com"
 
 const mailer = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: 'devendra.mishra@redcrackle.com',
-    pass: 'deve1234!@#$',
+    user: 'shantanu.goswami@redcrackle.com',
+    pass: 'Madeuta1313#',
   },
 })
 app.post("/contact", function (req, res) {
@@ -22,7 +22,7 @@ app.post("/contact", function (req, res) {
   let mailOptions = {
     from: `${formData.emailaddress}`,
     to: [contactAddress],
-    subject: "Contact form Submission from Redcrackle",
+    subject: "Contact us form submission from Redcrackle",
     text: 'Hi, Admin',
     html: `<b>Firstname: ${formData.firstname}</b><br>
            <b>Lastname: ${formData.lastname}</b><br>
